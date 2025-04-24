@@ -1,0 +1,187 @@
+@layer components {
+    /* 地圖頁面用 */
+
+    /* Header 的 input */
+    .title-input {
+        @apply w-[32%] flex h-15 bg-white/10 backdrop-blur-28 text-font20 text-white rounded-lg items-center relative
+    }
+    .title-input p {
+        @apply w-[32%] text-center
+    }
+    .title-input input {
+        @apply w-[68%] bg-neutral-80/10 border-none pl-6 rounded-r-lg absolute top-0 right-0 bottom-0
+    }
+    .close-btn {
+        @apply bg-neutral-20/50 text-white p-5 rounded-lg
+    }
+
+    /* 側邊欄位框 Style */
+    .contentColumn {
+        @apply w-[270px] h-full bg-white rounded-3xl overflow-hidden relative
+    }
+    .contentColumn .contentWrap {
+        @apply h-[87%] px-4 pt-4 pb-28 overflow-y-auto
+    }
+
+    /* 切換設定專案類型的 label 按鈕(上傳 or 手動) */
+    .setTypeSwitch {
+        @apply flex justify-center
+    }
+    .setTypeSwitch label {
+        @apply mr-2 last:mr-0 cursor-pointer
+    }
+    .setTypeSwitch p {
+        @apply text-primary-80 px-3 py-4 rounded-t-lg transition-colors duration-500
+    }
+    .setTypeSwitch p:before  {
+        @apply mr-2
+    }
+    .setTypeSwitch .typeSwitch-action {
+        @apply bg-white text-primary-30 rounded-t-lg
+    }
+    .setProjectColumn li {
+        @apply ml-0 mb-4 last:mb-0
+    }
+    .setProjectColumn label { /*檢查後可以刪除*/
+        @apply block relative
+    }
+    .labelTitle {
+        @apply flex items-center mb-2
+    }
+    .labelTitle:before {
+        @apply mr-2
+    }
+
+    /* 左側邊設定欄位 */
+    .setProject-input {
+        @apply w-full px-3 py-4 border border-customGray rounded-lg
+    }
+    .setProject-textarea {
+        @apply w-full px-3 py-2 border border-customGray rounded-lg
+    }
+    .setProject-input[type="number"]::-webkit-outer-spin-button,
+    .setProject-input[type="number"]::-webkit-inner-spin-button
+    {
+        @apply appearance-none
+    }
+    .setProject-input[type="file"]::file-selector-button {
+        @apply text-white bg-primary-60 p-2 border-none rounded
+    }
+    .setProject-clearBtn {
+        @apply absolute right-3 bottom-5
+    }
+
+    /* 左側邊設定欄位：任務列表中的任務 Card */
+    .taskCard {
+        @apply flex justify-between border-b border-devider first:border-t cursor-pointer
+    }
+    .taskCard .taskCard-header {
+        @apply px-2 py-11 border-r
+    }
+    .taskCard .taskCard-body {
+        @apply px-2 py-4 flex flex-col justify-between grow
+    }
+    .taskCard .taskCard-footer {
+        @apply px-2 py-4 flex flex-col justify-between
+    }
+    .taskCrad-action {
+        @apply border-primary-90
+    }
+    .taskCrad-action .taskCard-header {
+        @apply bg-primary-90
+    }
+    .taskCard-more {
+        @apply absolute top-0 bottom-0 left-0 right-0 backdrop-blur flex justify-around items-center
+    }
+    .taskCard-more  button {
+        @apply border flex flex-col justify-center items-center w-[64px] h-[64px] rounded-lg hover:text-white
+    }
+    /* 左側邊設定欄位：任務列表中的任務 Card 的...其他選項樣式*/
+    .speech-bubble {
+        right: -112px;
+        top: 0px;
+        @apply relative bg-white rounded-xl shadow-[0_4px_8px_0px_rgba(0,0,0,0.2)]
+    }
+    .speech-bubble:after {
+        content: '';
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 12px 8px 0;
+        border-color: transparent #ffffff transparent transparent;
+        position: absolute;
+        top: 17%;
+        left: -10%;
+        filter: drop-shadow(-3px 2px 3px rgba(0, 0, 0, .2));
+    }
+    .speech-bubble li button {
+        @apply w-28 h-auto text-left pl-3 py-3
+    }
+    .speech-bubble li button:before {
+        @apply mr-1
+    }
+
+    /* Points 顯示欄位 */
+    .column-btn-sm {
+        @apply block text-white py-2 rounded-lg text-center cursor-pointer
+    }
+    .column-btn-lg {
+        @apply block text-white py-4 rounded-2xl text-center cursor-pointer
+    }
+    .btn-disabled {
+        @apply bg-neutral-90 text-neutral-70
+    }
+    .btn-margin:before {
+        @apply mr-4
+    }
+
+
+    /* 地圖上 Number Icon 樣式 */
+    .numberIcon-circle {
+        width: 25px !important;
+        height: 25px !important;
+        margin-left: -12px !important;
+        margin-top: -12px !important;
+        @apply text-white text-center bg-numberIcon-light border-4 border-solid border-white rounded-full
+    }
+    .numberIcon-square {
+        width: 25px !important;
+        height: 25px !important;
+        margin-left: -12px !important;
+        margin-top: -12px !important;
+        @apply text-white text-center bg-numberIcon-dark border-4 border-solid border-white rounded-lg
+    }
+    /* leaflet 地圖上 position Number Icon 樣式 */
+    .numberIcon-point {
+        position: relative; 
+        width: 15px !important; 
+        height: 15px !important; 
+        border-radius: 50%; 
+        background-color: #FF1CB2;
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 900;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    .numberIcon-point::after {
+        content: ''; 
+        position: absolute;
+        top: 11px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 6px solid transparent; 
+        border-top-color: #FF1CB2; 
+    }
+    /* 地圖上 Edit Button 樣式 */
+    .editButton {
+        @apply text-white bg-black/50 w-[144px] h-[99px] rounded-2xl text-font24 translate-x-[-50%] translate-y-[-50%] relative
+    }
+    .editButton  p{
+        @apply text-font20
+    }
+    .editButton div {
+        @apply absolute top-[-5px] right-[-5px]
+    }
+}

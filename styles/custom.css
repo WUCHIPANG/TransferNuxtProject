@@ -1,0 +1,274 @@
+
+@layer base {
+  body {
+    @apply h-full;
+    font-family: 'Noto Sans', sans-serif;
+  }
+  
+  textarea {
+    @apply resize-none
+  }
+
+    /* width */
+  ::-webkit-scrollbar {
+    @apply w-1
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-80 rounded
+  }
+}
+/* components */
+  @layer components{
+    /* Figma 8pt Grid */
+    .grid-hight-color{
+      @apply h-4 bg-gridColor
+    }
+    .grid-1{
+      @apply w-px grid-hight-color
+    }
+    .grid-8{
+      @apply w-2 grid-hight-color
+    }
+    .grid-12{
+      @apply w-3 grid-hight-color
+    }
+    .grid-16{
+      @apply w-4 grid-hight-color
+    }
+    .grid-20{
+      @apply w-5 grid-hight-color
+    }
+    .grid-24{
+      @apply w-6 grid-hight-color
+    }
+    .grid-32{
+      @apply w-8 grid-hight-color
+    }
+    .grid-40{
+      @apply w-10 grid-hight-color
+    }
+    .grid-48{
+      @apply w-12 grid-hight-color
+    }
+    .grid-56{
+      @apply w-14 grid-hight-color
+    }
+    .grid-64{
+      @apply w-16 grid-hight-color
+    }
+
+    /* Figma ELEVATION */
+    .elevation{
+      @apply w-[216px] h-[216px] rounded-2xl
+    }
+    .elevation-1{
+      @apply elevation;
+      background: rgb(246, 242, 250);
+    }
+    .elevation-2{
+      @apply elevation;
+      background:rgb(243, 237, 247);
+      box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.16)  
+    }
+    .elevation-3{
+      @apply elevation; 
+      background:rgb(236, 230, 240);
+      box-shadow: 4px 16px 16px rgba(0, 0, 0, 0.2)
+    }
+    /* edit header */
+    .edit-header{
+      @apply bg-white;
+      box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.04);
+    }
+    /* input type */
+    .form-input,
+    .form-textarea,
+    .form-select,
+    .form-multiselect{
+        @apply block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 focus:ring-0 rounded-lg
+    }
+    .form-checkbox{
+        @apply relative float-left -ml-[1.5rem] mr-[6px] h-6 w-6 appearance-none rounded border-neutral-90 text-active focus:ring-0
+    }
+    .input-type{
+      @apply ring-devider rounded-lg ring-1 ring-inset h-14 
+    }
+    .input-shadow{
+      @apply border-none;
+      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25)
+    }
+    .input-shadow:focus-within{
+      @apply border border-active;
+      box-shadow: 0px 0px 6px rgb(76,148,255)
+    }
+    .input-error{
+      @apply border border-danger;
+      @apply bg-dangerBG;
+      box-shadow: 0px 0px 6px rgb(255,51,51)
+    }
+      /* DropDwon */
+      .dropDown-type{
+        @apply bg-white rounded-4xl border-none;
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25)
+      }
+      .dropDown-type:hover{
+        @apply border border-active;
+        box-shadow: 0px 0px 6px rgb(76,148,255)
+      }
+      /* modal btn */
+      .modal-button{
+        @apply w-56 h-[52px] rounded-xl text-font20 flex justify-center items-center cursor-pointer
+      }
+      /* menu */
+      .menu-border{
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.04);
+      }
+      .menu-item-border{
+        @apply border-devider border-y px-4 py-6 ;
+      }
+      .menu-sub{
+        @apply w-[95%]  h-[54px]  mx-auto rounded-full flex items-center justify-center text-font20Regular cursor-pointer hover:bg-active hover:text-white focus:bg-active focus:text-white
+      }
+      .menu-item-linear{
+        background: linear-gradient(180deg, rgba(218, 226, 239, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+      }
+      .menu-item-linear-bottom{
+        background: linear-gradient(180deg, rgba(218, 226, 239, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+        transform: matrix(1, 0, 0, -1, 0, 0);
+      }
+      details[open] summary ~ * {
+        animation: sweep .5s ease-in-out;
+      }
+      @keyframes sweep {
+        0%    {opacity: 0; margin-left: -1px}
+        100%  {opacity: 1; margin-left: 0px}
+      }
+    /* table */
+      .table-th{
+        @apply text-neutral-10 border border-devider border-collapse
+      }
+      .table-td{
+        @apply text-neutral-20 border border-devider border-collapse
+      }
+    /* 下拉選單 */
+      .listboxOP > :not([hidden]) ~ :not([hidden]) {
+        --tw-space-x-reverse: none;
+        margin-right: 8px;
+        margin-left: 8px;
+      }
+
+    /* step */
+      .step-ul > :not([hidden]) ~ :not([hidden]) {
+        margin-left: 0;
+      }
+      select > option {
+        @apply text-font20Regular;
+      }
+      /* table hover 按鈕提示 */
+       .table-hover tbody tr:not(:last-child) .hoverBtn .tooltip {
+      @apply translate-y-[140%]
+    }
+       .table-hover tbody tr:not(:last-child) .hoverBtn .tooltip .triangle{
+        @apply absolute -top-[4px];
+          
+          width: 0px;
+          height: 0px;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-bottom: 8px solid #121212;
+          transform: rotate(0deg);
+    }
+      /* 取Table最後一筆 */
+    .table-hover tbody tr:last-child .hoverBtn .tooltip {
+      @apply -translate-y-[140%]
+    }
+    .table-hover tbody tr:last-child .hoverBtn .triangle {
+      @apply absolute top-[26px];
+        width: 0px;
+        height: 0px;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid #121212;
+        transform: rotate(0deg);
+    }
+     .table-hover-border {
+      @apply border-separate;
+      border-spacing: 0;
+      border-radius: 8px;
+    }
+    .table-hover-border thead tr td{
+      @apply border-x border-t border-devider 
+    }
+    .table-hover-border tbody td {
+      @apply border border-b-0
+    }
+    .table-hover-border tbody tr:last-child td:first-child {
+      @apply rounded-bl-lg 
+    }
+    .table-hover-border tbody tr:last-child td:last-child {
+      @apply rounded-br-lg 
+    }
+    .table-hover-border tbody tr:last-child td {
+      @apply border-b
+    }
+    .table-hover-border tbody tr:hover td {
+      @apply border-t border-t-active border-b border-b-active
+    }
+    .table-hover-border tbody tr:hover td:first-child {
+      @apply border-l border-l-active bg-active text-white
+    }
+    .table-hover-border tbody tr:hover td:last-child  {
+      @apply border-r border-r-active text-active
+    }
+     .table-hover-border tbody tr td .levelBar{
+      @apply opacity-0 invisible;
+      transition: all .3s ease
+    }
+        /* 前台切換BTN */
+    .segmented-font{
+      @apply inline-flex items-center px-6  text-font20 text-neutral-50 
+    }
+    .segmented-control{
+      @apply text-active bg-surface-3;
+      box-shadow: inset -4px 0px 12px rgba(134, 161, 255, 0.25);
+    }
+   /* Inspection Type */
+    .typeGroup ul li:first-child{
+      @apply rounded-l-full
+    }
+    .typeGroup ul li:last-child{
+      @apply rounded-r-full
+    }
+    .typeGroup ul > :not([hidden]) ~ :not([hidden]){
+      @apply mx-0
+    }
+  .picList-li  {
+    }
+    .resultList{
+      box-shadow: 0px 12px 16px -4px #00000040;
+    }
+    .resultList .resultEdit{
+      @apply block
+    }
+    .resultLog{
+      box-shadow: -24px 0px 32px 0px #00000080;
+    }
+    /*結果審查圖片列表*/
+    .picListUL > :not([hidden]) ~ :not([hidden]){
+      margin-left:0;
+    }
+
+
+
+  }
+/* range 日期時間搜尋INPUT */
+.dp__input_wrap > input::-webkit-input-placeholder{
+  @apply text-font14Regular tracking-tight
+}
