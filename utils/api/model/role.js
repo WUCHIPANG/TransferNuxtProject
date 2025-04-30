@@ -1,19 +1,25 @@
 import httpReq from '~/utils/request'
 
+const base = '/Role'
+const urls = {
+  list: base,
+  detail: base + '/',
+  droneOperatorList: base + '/DroneOperator'
+}
 export default {
   list: {
-    url: `/Role`,
+    url: urls.list,
     name: '撈取角色清單',
-    get: (params) => httpReq.get('/Role', params)
+    get: (params) => httpReq.get(urls.list, params)
   },
   detail: {
-    url: `/Role`,
+    url: urls.detail,
     name: '撈取角色資料',
-    get: (roleID) => httpReq.get(`/Role/${roleID}`)
+    get: (roleID) => httpReq.get(`${urls.detail}/${roleID}`)
   },
   droneOperatorList: {
-    url: `/Role/DroneOperator`,
+    url: urls.droneOperatorList,
     name: '撈取飛手資訊',
-    get: () => httpReq.get('/Role/DroneOperator')
+    get: () => httpReq.get(urls.droneOperatorList)
   },
 }

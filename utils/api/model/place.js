@@ -1,49 +1,45 @@
-import config from '@/config'
-import httpReq from '@/utils/request'
+import httpReq from '~/utils/request'
 
+const base = '/Place'
+const urls = {
+  list: base,
+  detail: base + '/',
+  add: base,
+  update: base + '/',
+  delete: base + '/',
+  mockPlaceList: base,
+}
 export default {
   list: {
-    url: `${config.API_URL}/Place`,
+    url: urls.list,
     name: '取得案場清單',
-    get: async function(params) {
-      return await httpReq.get(this.url, params)
-    },
+    get: (params) => httpReq.get(urls.list, params)
   },
   detail: {
-    url: `${config.API_URL}/Place/`,
+    url: urls.detail,
     name: '取得案場資訊',
-    get: async function(params) {
-      return await httpReq.get(this.url + params)
-    },
+    get: (params) => httpReq.get(urls.detail + params)
   },
   add: {
-    url: `${config.API_URL}/Place`,
+    url: urls.add,
     name: '新增案場資訊',
-    post: async function(data = {}) {
-      return await httpReq.post(this.url, data)
-    },
+    post: (data = {}) => httpReq.post(urls.add, data)
   },
   update: {
-    url: `${config.API_URL}/Place/`,
+    url: urls.update,
     name: '修改案場資訊',
-    put: async function(params, data = {}) {
-      return await httpReq.put(this.url + params, data)
-    },
+    put: (params, data = {}) => httpReq.put(urls.update + params, data)
   },
   delete: {
-    url: `${config.API_URL}/Place/`,
+    url: urls.delete,
     name: '刪除案場資訊',
-    delete: async function(placeID) {
-      return await httpReq.delete(this.url + placeID)
-    },
+    delete: (placeID) => httpReq.delete(urls.delete + placeID)
   },
   // Mock API
   mockPlaceList: {
-    url: `${config.MOCK_API_URL}/Place`,
+    url: urls.mockPlaceList,
     name: '取得客戶案場清單',
-    get: async function() {
-      return await httpReq.get(this.url)
-    },
+    get: () => httpReq.get(urls.mockPlaceList)
   },
 
 }

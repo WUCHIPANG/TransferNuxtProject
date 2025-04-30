@@ -1,20 +1,20 @@
-import config from '@/config'
-import httpReq from '@/utils/request'
+import httpReq from '~/utils/request'
 
+const base = '/InspectionType'
+const urls = {
+  type: base,
+  eventsRanks: base + '/EventsRanks',
+}
 export default {
   // 取得巡檢類型清單
   type: {
-    url: `${config.API_URL}/InspectionType`,
+    url: urls.type,
     name: '撈取巡檢類型清單',
-    get: async function(params) {
-      return await httpReq.get(this.url, params)
-    },
+    get: (params) => httpReq.get(urls.type, params)
   },
   eventsRanks: {
-    url: `${config.API_URL}/InspectionType/EventsRanks`,
+    url: urls.eventsRanks,
     name: '撈取巡檢類型事件清單',
-    get: async function(id) {
-      return await httpReq.get(`${this.url}/${id}`)
-    },
+    get: (id) => httpReq.get(`${urls.eventsRanks}/${id}`)
   },
 }

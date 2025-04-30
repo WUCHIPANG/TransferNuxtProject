@@ -7,5 +7,10 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/eslint',
     '@nuxtjs/tailwindcss'
-  ]
+  ],
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://10.0.101.81:4100/API', // 根據你的設定
+    }
+  }
 })

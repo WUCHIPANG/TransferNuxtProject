@@ -1,22 +1,19 @@
 import httpReq from '~/utils/request'
 
+const urls = {
+  login: '/Login',
+  token: '/auth/token',
+}
 export default {
-  // login: {
-  //   url: `${config.API_URL}/Login`,
-  //   name: '登入獲取USER資訊及MENU',
-  //   post: async function(data = {}) {
-  //     return await httpReq.post(this.url, data)
-  //   },
-  // },
   login: {
-    url: '/Login',
+    url: urls.login,
     name: '登入',
-    post: (data = {}) => httpReq.post('/Login', data),
+    post: (data = {}) => httpReq.post(urls.login, data),
   },
   // Mock API
   token: {
-    url: `/auth/token`,
+    url: urls.token,
     name: '登入獲取TOKEN',
-    get: () => httpReq.get('/auth/token')
+    get: () => httpReq.get(urls.token)
   },
 }

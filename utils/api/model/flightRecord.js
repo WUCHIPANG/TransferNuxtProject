@@ -1,110 +1,97 @@
-import config from '@/config'
-import httpReq from '@/utils/request'
+import httpReq from '~/utils/request'
 
+const base = '/FlightRecord'
+const urls = {
+  summary: base + '/Summary',
+  recordList: base,
+  recordDetail: base + '/',
+  imgList: base + '/Image',
+  imgDetail: base + '/Image/',
+  FRFileList: base + '/FRFile',
+  FRFile: base + '/FRFile/',
+  pathList: base + '/Path/',
+  uploadFlightRecord : base + '/UploadFlightRecord',
+  UploadFlightRecordFile: base + '/UploadFlightRecordFile',
+  planFRFileTypeList: base + '/FRFileType',
+  planFRFileList: base + '/Plan/Flight/FRFile',
+  relation: base + '/Plan/Flight/FRFile/Relation',
+  activeAIProcess: '/InspectionManage/AIAnalysis',
+  delete: base + '/Plan/Flight/FRFile'
+}
 export default {
   summary: {
-    url: `${config.API_URL}/FlightRecord/Summary`,
+    url: urls.summary,
     name: '取得飛行紀錄摘要',
-    get: async function(params) {
-      return await httpReq.get(this.url, params)
-    },
+    get: (params) => httpReq.get(urls.summary, params)
   },
   recordList: {
-    url: `${config.API_URL}/FlightRecord`,
+    url: urls.recordList,
     name: '取得飛行記錄清單',
-    get: async function(params) {
-      return await httpReq.get(this.url, params)
-    },
+    get: (params) => httpReq.get(urls.recordList, params)
   },
   recordDetail: {
-    url: `${config.API_URL}/FlightRecord/`,
+    url: urls.recordDetail,
     name: '取得飛行記錄Detail',
-    get: async function(params) {
-      return await httpReq.get(this.url + params)
-    },
+    get: (params) => httpReq.get(urls.recordDetail, params)
   },
   imgList: {
-    url: `${config.API_URL}/FlightRecord/Image`,
+    url: urls.imgList,
     name: '取得圖片記錄清單',
-    get: async function(params) {
-      return await httpReq.get(this.url, params)
-    },
+    get: (params) => httpReq.get(urls.imgList, params)
   },
   imgDetail: {
-    url: `${config.API_URL}/FlightRecord/Image/`,
+    url: urls.imgDetail,
     name: '取得圖片記錄資訊',
-    get: async function(params) {
-      return await httpReq.get(this.url + params)
-    },
+    get: (params) => httpReq.get(urls.imgDetail, params)
   },
   FRFileList: {
-    url: `${config.API_URL}/FlightRecord/FRFile`,
+    url: urls.FRFileList,
     name: '取得飛行紀錄檔案清單',
-    get: async function(params) {
-      return await httpReq.get(this.url, params)
-    },
+    get: (params) => httpReq.get(urls.FRFileList, params)
   },
   FRFile: {
-    url: `${config.API_URL}/FlightRecord/FRFile/`,
+    url: urls.FRFile,
     name: '取得飛行紀錄圖片/影片',
-    get: async function(params) {
-      return await httpReq.get(this.url + params)
-    },
+    get: (params) => httpReq.get(urls.FRFile + params)
   },
   pathList: {
-    url: `${config.API_URL}/FlightRecord/Path/`,
+    url: urls.pathList,
     name: '取得飛行紀錄路線清單',
-    get: async function(params) {
-      return await httpReq.get(this.url + params)
-    },
+    get: (params) => httpReq.get(urls.pathList + params)
   },
   uploadFlightRecord: {
-    url: `${config.API_URL}/FlightRecord/UploadFlightRecord`,
+    url: urls.uploadFlightRecord,
     name: '上傳飛行記錄檔',
-    post: async function(data, config = {}) {
-      return await httpReq.post(this.url, data, config)
-    },
+    post: (data, config = {}) => httpReq.post(urls.uploadFlightRecord, data, config)
   },
   UploadFlightRecordFile: {
-    url: `${config.API_URL}/FlightRecord/UploadFlightRecordFile`,
+    url: urls.UploadFlightRecordFile,
     name: '上傳飛行記錄圖片/影像檔',
-    post: async function(data, config = {}) {
-      return await httpReq.post(this.url, data, config)
-    },
+    post: (data, config = {}) => httpReq.post(urls.UploadFlightRecordFile, data, config)
   },
   planFRFileTypeList: {
-    url: `${config.API_URL}/FlightRecord/Plan/Flight/FRFileType`,
+    url: urls.planFRFileTypeList,
     name: '撈取任務檔案類型清單(可見光+熱顯)',
-    get: async function(params) {
-      return await httpReq.get(this.url, params)
-    },
+    get: (params) => httpReq.get(urls.planFRFileTypeList, params)
   },
   planFRFileList: {
-    url: `${config.API_URL}/FlightRecord/Plan/Flight/FRFile`,
+    url: urls.planFRFileList,
     name: '撈取任務檔案清單(可見光+熱顯)',
-    get: async function(params) {
-      return await httpReq.get(this.url, params)
-    },
+    get: (params) => httpReq.get(urls.planFRFileList, params)
   },
   relation: {
-    url: `${config.API_URL}/FlightRecord/Plan/Flight/FRFile/Relation`,
+    url: urls.relation,
     name: '建立可見光與熱顯與溫度的對應關係',
-    put: async function(data = {}) {
-      return await httpReq.put(this.url, data)
-    },
+    put: (data = {}) => httpReq.put(urls.relation, data)
   },
   activeAIProcess: {
-    url: `${config.API_URL}/InspectionManage/AIAnalysis`,
+    url: urls.activeAIProcess,
     name: '觸發AI分析',
-    post: async function(data = {}) {
-      return await httpReq.post(this.url, data)
-    },
+    post: (data = {}) => httpReq.post(urls.activeAIProcess, data)
   },
   delete: {
-    url: `${config.API_URL}/FlightRecord/Plan/Flight/FRFile`,
+    url: urls.delete,
     name: '刪除飛行紀錄圖片(熱顯or可見光)清單',
-    delete: async function(fileID) {
-      return await httpReq.delete(`${this.url}/${fileID}`)
-    },
+    delete: (fileID) => httpReq.delete(`${urls.delete}/${fileID}`)
   },
 }

@@ -1,207 +1,183 @@
-import config from '@/config'
-import httpReq from '@/utils/request'
+import httpReq from '~/utils/request'
 
+const base = '/Plan'
+const standard = '/PlanFile'
+const urls = {
+  projectList: base,
+  projectDetail: base,
+  projectAdd: base,
+  projectEdit: base,
+  projectDelete: base,
+  flightList: base + '/Flight',
+  flightAdd: base + '/Flight',
+  flightDetail: base + '/Flight',
+  flightEdit: base + '/Flight',
+  flightDelete: base + '/Flight',
+  windDirection: base + '/Flight/WindDirection',
+  unexecutedReason: base + '/Flight/UnexecutedReason',
+  status: base + '/Flight/Status',
+  moduleNums: base + '/Flight/ModuleNums',
+  notify: base + '/Flight/Notify',
+  upload: standard,
+  fileList: standard,
+  fileDownload: standard,
+  fileDelete: standard,
+  stitchingAdd: standard + '/Flight/StitchingImage',
+  stitchingDownload: standard + '/Flight/StitchingImage',
+  stitchingDelete: standard + '/Flight/StitchingImage',
+  nameList: base + '/NameList',
+  list: base + '/list',
+  range: base + '/Range',
+  suggestionList: base + '/Suggestion',
+  suggestionAdd: base + '/Suggestion',
+}
 export default {
   // 巡檢專案維護
   project: {
     list: {
-      url: `${config.API_URL}/Plan`,
+      url: urls.projectList,
       name: '撈取巡檢專案清單',
-      get: async function(params) {
-        return await httpReq.get(this.url, params)
-      },
+      get: (params) => httpReq.get(urls.projectList, params)
     },
     detail: {
-      url: `${config.API_URL}/Plan`,
+      url: urls.projectDetail,
       name: '撈取巡檢專案詳細資料',
-      get: async function(planID) {
-        return await httpReq.get(`${this.url}/${planID}`)
-      },
+      get: (planID) => httpReq.get(`${urls.projectDetail}/${planID}`)
     },
     add: {
-      url: `${config.API_URL}/Plan`,
+      url: urls.projectAdd,
       name: '新增巡檢專案資訊',
-      post: async function(params) {
-        return await httpReq.post(this.url, params)
-      },
+      post: (params) => httpReq.post(urls.projectAdd, params)
     },
     edit: {
-      url: `${config.API_URL}/Plan`,
+      url: urls.projectEdit,
       name: '修改巡檢專案資訊',
-      put: async function(params) {
-        return await httpReq.put(`${this.url}/${params.planID}`, params)
-      },
+      put: (params) => httpReq.put(`${urls.projectEdit}/${params.planID}`, params)
     },
     delete: {
-      url: `${config.API_URL}/Plan`,
+      url: urls.delete,
       name: '刪除巡檢專案資訊',
-      delete: async function(planID) {
-        return await httpReq.delete(`${this.url}/${planID}`)
-      },
+      delete: (planID) => httpReq.delete(`${urls.delete}/${planID}`)
     },
   },
   // 巡檢資料維護(飛行紀錄)
   flight: {
     list: {
-      url: `${config.API_URL}/Plan/Flight`,
+      url: urls.flightList,
       name: '撈取巡檢飛行資料清單',
-      get: async function(params) {
-        return await httpReq.get(this.url, params)
-      },
+      get: (params) => httpReq.get(urls.flightList, params)
     },
     add: {
-      url: `${config.API_URL}/Plan/Flight`,
+      url: urls.flightAdd,
       name: '新增巡檢飛行資料',
-      post: async function(params) {
-        return await httpReq.post(this.url, params)
-      },
+      post: (params) => httpReq.post(urls.flightAdd, params)
     },
     detail: {
-      url: `${config.API_URL}/Plan/Flight`,
+      url: urls.flightDetail,
       name: '撈取巡檢飛行資料',
-      get: async function(planFlightID) {
-        return await httpReq.get(`${this.url}/${planFlightID}`)
-      },
+      get: (planFlightID) => httpReq.get(`${urls.flightDetail}/${planFlightID}`)
     },
     edit: {
-      url: `${config.API_URL}/Plan/Flight`,
+      url: urls.flightEdit,
       name: '修改巡檢飛行資料',
-      put: async function(planFlightID, params) {
-        return await httpReq.put(`${this.url}/${planFlightID}`, params)
-      },
+      put: (planFlightID, params) => httpReq.put(`${urls.flightEdit}/${planFlightID}`, params)
     },
     delete: {
-      url: `${config.API_URL}/Plan/Flight`,
+      url: urls.flightDelete,
       name: '刪除巡檢飛行資料',
-      delete: async function(planFlightID) {
-        return await httpReq.delete(`${this.url}/${planFlightID}`)
-      },
+      delete: (planFlightID) => httpReq.delete(`${urls.flightDelete}/${planFlightID}`)
     },
     windDirection: {
-      url: `${config.API_URL}/Plan/Flight/WindDirection`,
+      url: urls.WindDirection,
       name: '撈取風向清單',
-      get: async function() {
-        return await httpReq.get(this.url)
-      },
+      get: () => httpReq.get(urls.WindDirection)
     },
     unexecutedReason: {
-      url: `${config.API_URL}/Plan/Flight/UnexecutedReason`,
+      url: urls.unexecutedReason,
       name: '修改巡檢飛行資料未執行原因',
-      put: async function(planFlightID, params) {
-        return await httpReq.put(`${this.url}/${planFlightID}`, params)
-      },
+      put: (planFlightID, params) => httpReq.put(`${urls.unexecutedReason}/${planFlightID}`, params)
     },
     status: {
-      url: `${config.API_URL}/Plan/Flight/Status`,
+      url: urls.status,
       name: '修改飛行任務狀態',
-      put: async function(planFlightID, params) {
-        return await httpReq.put(`${this.url}/${planFlightID}`, params)
-      },
+      put: (planFlightID, params) => httpReq.put(`${urls.status}/${planFlightID}`, params)
     },
     moduleNums: {
-      url: `${config.API_URL}/Plan/Flight/ModuleNums`,
+      url: urls.moduleNums,
       name: '修改飛行任務模組數量',
-      put: async function(planFlightID, data) {
-        return await httpReq.put(`${this.url}/${planFlightID}`, data)
-      },
+      put: (planFlightID, data) => httpReq.put(`${urls.moduleNums}/${planFlightID}`, data)
     },
     notify: {
-      url: `${config.API_URL}/Plan/Flight/Notify`,
+      url: urls.notify,
       name: '新增巡檢飛行資料',
-      post: async function(planFlightID, data) {
-        return await httpReq.post(`${this.url}/${planFlightID}`, data)
-      },
+      post: (planFlightID, data) => httpReq.post(`${urls.notify}/${planFlightID}`, data)
     },
   },
   upload: {
-    url: `${config.API_URL}/PlanFile`,
+    url: urls.upload,
     name: '上傳專案附件檔',
-    post: async function(data, config = {}) {
-      return await httpReq.post(this.url, data, config)
-    },
+    post: (data, config = {}) => httpReq.post(urls.upload, data, config)
   },
   file: {
     list: {
-      url: `${config.API_URL}/PlanFile`,
+      url: urls.fileList,
       name: '撈取專案附件清單',
-      get: async function(params) {
-        return await httpReq.get(this.url, params)
-      },
+      get: (params) => httpReq.get(urls.fileList, params)
     },
     download: {
-      url: `${config.API_URL}/PlanFile`,
+      url: urls.fileDownload,
       name: '撈取專案附件清單',
-      get: async function(fileID, params, config = { responseType: 'blob' }) {
-        return await httpReq.get(`${this.url}/${fileID}`, params, config)
-      },
+      get: (fileID, params, config = { responseType: 'blob' }) => httpReq.get(`${urls.fileDownload}/${fileID}`, params, config)
     },
     delete: {
-      url: `${config.API_URL}/PlanFile`,
+      url: urls.fileDelete,
       name: '刪除專案附件清單',
-      delete: async function(fileID) {
-        return await httpReq.delete(`${this.url}/${fileID}`)
-      },
+      delete: (fileID) => httpReq.delete(`${urls.fileDelete}/${fileID}`)
     },
   },
   stitching: {
     add: {
-      url: `${config.API_URL}/PlanFile/Flight/StitchingImage`,
+      url: urls.stitchingAdd,
       name: '上傳任務全景拼接圖',
-      post: async function(data, config = {}) {
-        return await httpReq.post(this.url, data, config)
-      },
+      post: (data, config = {}) => httpReq.post(urls.stitchingAdd, data, config)
     },
     download: {
-      url: `${config.API_URL}/PlanFile/Flight/StitchingImage`,
+      url: urls.stitchingDownload,
       name: '取得全景拼接圖片',
-      get: async function(planFlightID, data) {
-        return await httpReq.get(`${this.url}/${planFlightID}`, data)
-      },
+      get: (planFlightID, data) => httpReq.get(`${urls.stitchingDownload}/${planFlightID}`, data)
     },
     delete: {
-      url: `${config.API_URL}/PlanFile/Flight/StitchingImage`,
+      url: urls.stitchingDelete,
       name: '刪除全景拼接圖圖片',
-      delete: async function(planFlightID, fileType) {
-        return await httpReq.delete(`${this.url}/${planFlightID}?fileType=${fileType}`)
-      },
+      delete: (planFlightID, fileType) => httpReq.delete(`${urls.stitchingDelete}/${planFlightID}?fileType=${fileType}`)
     },
   },
   nameList: {
-    url: `${config.API_URL}/Plan/NameList`,
+    url: urls.nameList,
     name: '撈取全部巡檢專案清單',
-    get: async function() {
-      return await httpReq.get(this.url)
-    },
+    get: () => httpReq.get(urls.nameList)
   },
   // Mock API
   list: {
-    url: `${config.MOCK_API_URL}/plan/list`,
+    url: urls.list,
     name: '撈取巡檢專案清單',
-    get: async function(params) {
-      return await httpReq.get(this.url, params)
-    },
+    get: (params) => httpReq.get(urls.list, params)
   },
   range: {
-    url: `${config.API_URL}/Plan/Range`,
+    url: urls.range,
     name: '修改專案飛行範圍',
-    put: async function(planID, data) {
-      return await httpReq.put(`${this.url}/${planID}`, data)
-    },
+    put: (planID, data) => httpReq.put(`${urls.range}/${planID}`, data)
   },
   suggestion: {
     list: {
-      url: `${config.API_URL}/Plan/Suggestion`,
+      url: urls.suggestionList,
       name: '撈取建議註記清單',
-      get: async function(params) {
-        return await httpReq.get(this.url, params)
-      },
+      get: (params) => httpReq.get(urls.suggestionList, params)
     },
     add: {
-      url: `${config.API_URL}/Plan/Suggestion`,
+      url: urls.suggestionAdd,
       name: '新增建議註記',
-      post: async function(params) {
-        return await httpReq.post(this.url, params)
-      },
+      post: (params) => httpReq.post(urls.suggestionAdd, params)
     },
   },
 }

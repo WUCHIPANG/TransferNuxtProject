@@ -1,63 +1,57 @@
-import config from '@/config'
-import httpReq from '@/utils/request'
+import httpReq from '~/utils/request'
 
+const base = '/Customer'
+const urls = {
+  list: base,
+  detail: base + '/',
+  add: base,
+  update: base + '/',
+  delete: base + '/',
+  methodData: base + '/CustomerMethodData',
+  nameList: base + '/NameList',
+  mockCustomerList: base,
+}
 export default {
   list: {
-    url: `${config.API_URL}/Customer`,
+    url: urls.list,
     name: '取得客戶清單',
-    get: async function(params) {
-      return await httpReq.get(this.url, params)
-    },
+    get: (params) => httpReq.get(urls.list, params)
   },
   detail: {
-    url: `${config.API_URL}/Customer/`,
+    url: urls.detail,
     name: '取得客戶詳細資訊',
-    get: async function(params) {
-      return await httpReq.get(this.url + params)
-    },
+    get: (params) => httpReq.get(urls.detail + params)
   },
   add: {
-    url: `${config.API_URL}/Customer`,
+    url: urls.add,
     name: '新增客戶資訊',
-    post: async function(data = {}) {
-      return await httpReq.post(this.url, data)
-    },
+    post: (data = {}) => httpReq.post(urls.add, data)
   },
   update: {
-    url: `${config.API_URL}/Customer/`,
+    url: urls.update,
     name: '修改客戶資訊',
-    put: async function(params, data = {}) {
-      return await httpReq.put(this.url + params, data)
-    },
+    put: (params, data = {}) => httpReq.put(urls.update + params, data)
   },
   delete: {
-    url: `${config.API_URL}/Customer/`,
+    url: urls.delete,
     name: '刪除客戶資訊',
-    delete: async function(params) {
-      return await httpReq.delete(this.url + params)
-    },
+    delete: (params) => httpReq.delete(urls.delete + params)
   },
   methodData: {
-    url: `${config.API_URL}/Customer/CustomerMethodData`,
+    url: urls.methodData,
     name: '取得客戶功能設定清單',
-    get: async function() {
-      return await httpReq.get(this.url)
-    },
+    get: () => httpReq.get(urls.methodData)
   },
   nameList: {
-    url: `${config.API_URL}/Customer/NameList`,
+    url: urls.nameList,
     name: '撈取全部客戶資料',
-    get: async function() {
-      return await httpReq.get(this.url)
-    },
+    get: () => httpReq.get(urls.nameList)
   },
   // Mock API
   mockCustomerList: {
-    url: `${config.MOCK_API_URL}/Customer`,
+    url: urls.mockCustomerList,
     name: '取得客戶清單',
-    get: async function() {
-      return await httpReq.get(this.url)
-    },
+    get: () => httpReq.get(urls.mockCustomerList)
   },
 
 }

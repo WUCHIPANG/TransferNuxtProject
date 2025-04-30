@@ -6,13 +6,18 @@
  */
 
 import CryptoJS from 'crypto-js'
-import sysConfig from '@/config'
+import { useConfig } from '~/composables'
+
+function getSysConfig() {
+  return useConfig()
+}
 
 const tool = {}
 
 /* localStorage */
 tool.data = {
   set(key, data, datetime = 0) {
+    const sysConfig = getSysConfig() // 呼叫時再拿 config
     // 加密
     if (sysConfig.LS_ENCRYPTION === 'AES') {
       data = tool.crypto.AES.encrypt(JSON.stringify(data), sysConfig.LS_ENCRYPTION_key)
@@ -32,6 +37,7 @@ tool.data = {
           localStorage.removeItem(key)
           return null
         }
+        const sysConfig = getSysConfig() // 呼叫時再拿 config
         // 解密
         if (sysConfig.LS_ENCRYPTION === 'AES') {
           value.content = JSON.parse(tool.crypto.AES.decrypt(value.content, sysConfig.LS_ENCRYPTION_key))

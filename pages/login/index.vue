@@ -112,11 +112,12 @@
 
 <script setup>
 import { getCurrentInstance, ref, onMounted, reactive } from 'vue'
+import tool from '~/utils/tool'
 import Schema from 'async-validator'
 import moment from 'moment'
 import Dialog from '@/components/BaseModal.vue'
 import { Base64 } from 'js-base64'
-
+import { patchRoutesFromMenu } from '~/utils/routerPath'
 const { auth } = useApi()
 
 const router = useRouter()
@@ -137,11 +138,11 @@ const copyRightStr = ref('')
 
 onMounted(() => {
   copyRightStr.value = `© ${moment().format('YYYY')} CSI 中華系統整合. All rights reserved.`
-  proxy.$TOOL.data.remove('USER_INFO')
-  proxy.$TOOL.data.remove('MENU')
-  proxy.$TOOL.cookie.remove('TOKEN')
+  tool.data.remove('USER_INFO')
+  tool.data.remove('MENU')
+  tool.cookie.remove('TOKEN')
   // 記住我
-  form.account = proxy.$TOOL.data.get('REMEMBER_ME')
+  form.account = tool.data.get('REMEMBER_ME')
 })
 
 
@@ -170,51 +171,53 @@ const validateForm = () => {
   })
 }
 const userInfo = ref({})
-const submitForm = async() => {
+const submitForm = async () => {
   try {
     await validateForm()
-    // 驗證成功時的動作
+
     const payload = {
       userAc: form.account,
       userPw: form.password,
     }
 
-    // const res = await proxy.$API.auth.login.post(payload)
     const res = await auth.login.post(payload)
-    if (res.status === 'success') {
-      proxy.$TOOL.cookie.set('TOKEN', res.responseData.jwt)
+    console.log('res:', res)
 
+    if (res.status === 'success') {
+      tool.cookie.set('TOKEN', res.responseData.jwt)
       userInfo.value = res.responseData.employeeData
-      // userInfo.value.authList = getAuthList(res.responseData.jwt.split('.')[1])
-      proxy.$TOOL.data.set('USER_INFO', userInfo.value)
+      tool.data.set('USER_INFO', userInfo.value)
+
       if (res.responseData.authMenu.length === 0) {
         dialogProp.title = '無權限訪問'
         dialogProp.detail = '目前帳號無任何選單權限，請聯繫系統管理員'
         dialogProp.cancelButtonText = '關閉'
-
         openDialog.value = true
-        return false
+        return
       }
-    } else if (res.status === 'fail') {
+
+      tool.data.set('MENU', res.responseData.authMenu)
+      if (form.isRemember) {
+        tool.data.set('REMEMBER_ME', form.account)
+      } else {
+        tool.data.remove('REMEMBER_ME')
+      }
+
+      patchRoutesFromMenu(res.responseData.authMenu, router)
+
+      router.replace('/dashboard')
+    } else {
       dialogProp.title = 'Error'
       dialogProp.detail = res.message + '，請聯繫系統管理員'
       dialogProp.cancelButtonText = '關閉'
-
       openDialog.value = true
     }
-
-    proxy.$TOOL.data.set('MENU', res.responseData.authMenu)
-    if (form.isRemember) {
-      proxy.$TOOL.data.set('REMEMBER_ME', form.account)
-    } else {
-      proxy.$TOOL.data.remove('REMEMBER_ME')
-    }
-    router.replace({ path: '/' })
   } catch (err) {
-    // 驗證失敗時的動作
-    console.log(err)
+    console.error('Login Error:', err)
   }
 }
+
+
 const getAuthList = (jwt) => {
   const authListJwt = JSON.parse(Base64.decode(jwt))
   if (authListJwt.auth) {

@@ -1,19 +1,20 @@
-import config from '@/config'
-import httpReq from '@/utils/request'
+import httpReq from '~/utils/request'
+
+const base = '/Drone'
+const urls = {
+  list: base,
+  detail: base,
+}
 
 export default {
   list: {
-    url: `${config.API_URL}/Drone`,
+    url: urls.list,
     name: '取得無人機清單',
-    get: async function(params) {
-      return await httpReq.get(this.url, params)
-    },
+    get: (params) => httpReq.get(urls.list, params)
   },
   detail: {
-    url: `${config.API_URL}/Drone`,
+    url: urls.detail,
     name: '取得單筆無人機載具',
-    get: async function(droneID) {
-      return await httpReq.get(`${this.url}/${droneID}`)
-    },
+    get: (droneID) => httpReq.get(`${urls.detail}/${droneID}`)
   },
 }

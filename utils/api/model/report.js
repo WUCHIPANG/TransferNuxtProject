@@ -1,33 +1,31 @@
-import config from '@/config'
-import httpReq from '@/utils/request'
+import httpReq from '~/utils/request'
 
+const base = '/Report'
+const urls = {
+  planReport: base + '/PlanReport',
+  planFlightReport: base + '/PlanReport',
+  planReportAll: base + '/PlanFlightAllReport',
+  planFlightAIResult: base + '/PlanFlightAIResult',
+}
 export default {
   planReport: {
-    url: `${config.API_URL}/Report/PlanReport`,
+    url: urls.planReport,
     name: '匯出專案分級表',
-    get: async function(planID, params, config = { responseType: 'blob' }) {
-      return await httpReq.get(`${this.url}/${planID}`, params, config)
-    },
+    get: (planID, params, config = { responseType: 'blob' }) => httpReq.get(`${urls.planReport}/${planID}`, params, config)
   },
   planFlightReport: {
-    url: `${config.API_URL}/Report/PlanFlightReport`,
+    url: urls.planFlightReport,
     name: '匯出任務總表',
-    get: async function(planFlightID, params, config = { responseType: 'blob' }) {
-      return await httpReq.get(`${this.url}/${planFlightID}`, params, config)
-    },
+    get: (planFlightID, params, config = { responseType: 'blob' }) => httpReq.get(`${urls.planFlightReport}/${planFlightID}`, params, config)
   },
   planReportAll: {
-    url: `${config.API_URL}/Report/PlanFlightAllReport`,
+    url: urls.planReportAll,
     name: '匯出專案總表',
-    get: async function(planID, params, config = { responseType: 'blob' }) {
-      return await httpReq.get(`${this.url}/${planID}`, params, config)
-    },
+    get: (planID, params, config = { responseType: 'blob' }) => httpReq.get(`${urls.planReportAll}/${planID}`, params, config)
   },
   planFlightAIResult: {
-    url: `${config.API_URL}/Report/PlanFlightAIResult`,
+    url: urls.planFlightAIResult,
     name: '新增異常點位與事件資訊',
-    post: async function(data) {
-      return await httpReq.post(this.url, data, { responseType: 'blob' })
-    },
+    post: (data) => httpReq.post(urls.planFlightAIResult, data, { responseType: 'blob' })
   },
 }
